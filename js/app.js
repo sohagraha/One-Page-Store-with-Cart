@@ -1,5 +1,5 @@
 const loadProducts = () => {
-  const url = `http://127.0.0.1:5500/db.json`;
+  const url = `https://fakestoreapi.com/products`;
   fetch(url)
     .then((response) => response.json())
     .then((data) => showProducts(data));
@@ -16,34 +16,21 @@ const showProducts = (products) => {
     const image = product.image;
     const div = document.createElement("div");
     div.classList.add("product");
+    let id = "${product.id}";
     div.innerHTML = `<div class="single-product m-2">
       <div>
     <img class="product-image" src=${image}></img>
       </div>
-      <h4 class = "card-title">${product.title}</h4>
+      <h5 class = "card-title mt-3 fw-bold">${product.title}</h5>
+      <hr class = "w-75 mx-auto">
       <p><span class="fw-bold"> Category </span>: ${product.category}</p>
-      <h2>Price: $ ${product.price}</h2>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button onclick="details(${product.id})" id="details-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button></div>
-
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
+      <h3>Price: $${product.price}</h3>
+      <div class="d-flex justify-content-around bg-secondary rounded-pill mb-2">
+      <span class = " m-1 text-warning fw-bold p-1 fs-6">Rating: ${product.rating.rate}</span>
+      <span class = "m-1 text-white fw-bold p-1 fs-6">Total : ${product.rating.count}</span>
       </div>
+      <button onclick="addToCart(${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
+      <button onclick="details(${product.id})" id="details-btn" class="btn btn-danger">Details</button>
       `;
     document.getElementById("all-products").appendChild(div);
   }
@@ -52,7 +39,7 @@ const showProducts = (products) => {
 
 let count = 0;
 
-const addToCart = (id, price) => {
+const addToCart = price => {
   count = count + 1;
   document.getElementById("total-Products").innerText = count;
   updatePrice("price", price);
@@ -60,7 +47,7 @@ const addToCart = (id, price) => {
   updateTotal();
 };
 
-const details = (id) => {
+const details = id => {
   let productUrl = `https://fakestoreapi.com/products/${id}`
   fetch(productUrl)
     .then((response) => response.json())
@@ -68,13 +55,9 @@ const details = (id) => {
 }
 
 const detailsProduct = data => {
-  var myModal = document.getElementById('myModal')
-  var myInput = document.getElementById('myInput')
-
-  myModal.addEventListener('shown.bs.modal', function () {
-    myInput.focus()
-  })
+  console.log(data);
 }
+
 
 const getInputValue = id => {
   const element = document.getElementById(id).innerText;
