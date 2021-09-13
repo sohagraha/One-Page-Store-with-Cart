@@ -25,8 +25,8 @@ const showProducts = (products) => {
       <p><span class="fw-bold"> Category </span>: ${product.category}</p>
       <h3>Price: $${product.price}</h3>
       <div class="d-flex justify-content-around border border-1 border-info rounded-pill mb-2">
-        <span class = " m-1 text-rating fw-bold fs-6">Rating: ${product.rating.rate}</span>
-        <span class = "m-1 text-black fw-bold fs-6">Reviews : ${product.rating.count}</span>
+        <span class = " m-1 fw-bold fs-6">Rating: <span class="text-rating">${product.rating.rate}</span></span>
+        <span class = "m-1 text-black fw-bold fs-6">Reviews :<span class="text-rating"> ${product.rating.count}</span></span>
       </div>
       <button onclick="addToCart(${product.price})" id="addToCart-btn" class="buy-now m-1"><i class="fas fa-cart-plus"></i> Add to Cart</button>
       <button id="details-btn" class="btn-details">Details <i class="fas fa-info-circle"></i></button>
@@ -35,7 +35,7 @@ const showProducts = (products) => {
   }
 };
 
-
+// count iteam when click on add to cart 
 let count = 0;
 const addToCart = price => {
   count++;

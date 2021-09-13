@@ -16,10 +16,12 @@ body {
   transition: 0.3s;
 }
 .single-product{
+  background-color:rgb(243, 242, 242);
   border-radius: 10px;
   border: 2px solid rgb(204, 203, 203);
 }
 .single-product:hover {
+  background-color:ivory;
   box-shadow: 4px 4px 7px gray;
   border-radius: 10px;
   border: 2px solid rgb(0, 0, 0);
@@ -60,23 +62,23 @@ body {
   }
 }
 .text-rating{
-  color: #FF4747;
+  color: #d34949;
 }
 
 .buy-now{
-  background-color: #f8e3c4;
+  background-color: #b0beff;
   color: black;
   padding: 8px;
   border-radius: 5px;
   font-weight: bold;
 }
 .buy-now:hover{
-  background-color: #F94A2B;
+  background-color: #0B5ED7;
   color: white;
   font-weight: bold;
 }
 .btn-details{
-  background-color: #fdd3e1;
+  background-color: #f5f3f0;
   color: bla;
   padding: 8px;
   border-radius: 5px;
@@ -84,7 +86,7 @@ body {
 }
 
 .btn-details:hover{
-  background-color: #0B5ED7;
+  background-color: #111010;
   color: white;
   font-weight: bold;
 }
