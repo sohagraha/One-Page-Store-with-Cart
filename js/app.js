@@ -1,3 +1,4 @@
+// load all produduct from api 
 const loadProducts = () => {
   const url = `https://fakestoreapi.com/products`;
   fetch(url)
@@ -9,14 +10,12 @@ loadProducts();
 
 // show all product in UI 
 const showProducts = (products) => {
-
   // const allProducts = products.map((pd) => pd);
-
   for (const product of products) {
     const image = product.image;
     const div = document.createElement("div");
     div.classList.add("product");
-    let id = "${product.id}";
+    // single product with content 
     div.innerHTML = `<div class="single-product m-2">
       <div>
     <img class="product-image" src=${image}></img>
@@ -25,12 +24,12 @@ const showProducts = (products) => {
       <hr class = "w-75 mx-auto">
       <p><span class="fw-bold"> Category </span>: ${product.category}</p>
       <h3>Price: $${product.price}</h3>
-      <div class="d-flex justify-content-around bg-secondary rounded-pill mb-2">
-      <span class = " m-1 text-warning fw-bold p-1 fs-6">Rating: ${product.rating.rate}</span>
-      <span class = "m-1 text-white fw-bold p-1 fs-6">Total : ${product.rating.count}</span>
+      <div class="d-flex justify-content-around border border-1 border-info rounded-pill mb-2">
+        <span class = " m-1 text-rating fw-bold fs-6">Rating: ${product.rating.rate}</span>
+        <span class = "m-1 text-black fw-bold fs-6">Reviews : ${product.rating.count}</span>
       </div>
-      <button onclick="addToCart(${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button onclick="details(${product.id})" id="details-btn" class="btn btn-danger">Details</button>
+      <button onclick="addToCart(${product.price})" id="addToCart-btn" class="buy-now m-1"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+      <button id="details-btn" class="btn-details">Details <i class="fas fa-info-circle"></i></button>
       `;
     document.getElementById("all-products").appendChild(div);
   }
@@ -38,27 +37,15 @@ const showProducts = (products) => {
 
 
 let count = 0;
-
 const addToCart = price => {
-  count = count + 1;
+  count++;
   document.getElementById("total-Products").innerText = count;
   updatePrice("price", price);
   updateTaxAndCharge();
   updateTotal();
 };
 
-const details = id => {
-  let productUrl = `https://fakestoreapi.com/products/${id}`
-  fetch(productUrl)
-    .then((response) => response.json())
-    .then((data) => detailsProduct(data));
-}
-
-const detailsProduct = data => {
-  console.log(data);
-}
-
-
+// convert string to float function and return float value 
 const getInputValue = id => {
   const element = document.getElementById(id).innerText;
   const converted = parseFloat(element);
