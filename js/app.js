@@ -20,12 +20,14 @@ const showProducts = (products) => {
       <div>
     <img class="product-image" src=${image}></img>
       </div>
-      <h5 class = "card-title mt-3 fw-bold">${product.title}</h5>
+      <h5 class = "card-title title mt-3 fw-bold">${product.title}</h5>
       <hr class = "w-75 mx-auto">
       <p><span class="fw-bold"> Category </span>: ${product.category}</p>
-      <h3>Price: $${product.price}</h3>
+      <h3 class="text-rating fw-bold">$${product.price}</h3>
+      <hr class = "w-25 mx-auto">
       <div class="d-flex justify-content-around border border-1 border-info rounded-pill mb-2">
         <span class = " m-1 fw-bold fs-6">Rating: <span class="text-rating">${product.rating.rate}</span></span>
+        <span class = "fw-bold">||</span>
         <span class = "m-1 text-black fw-bold fs-6">Reviews :<span class="text-rating"> ${product.rating.count}</span></span>
       </div>
       <button onclick="addToCart(${product.price})" id="addToCart-btn" class="buy-now m-1"><i class="fas fa-cart-plus"></i> Add to Cart</button>
@@ -61,6 +63,11 @@ const updatePrice = (id, value) => {
   document.getElementById(id).innerText = total.toFixed(2);
 };
 
+// set innerText function for delivery charge
+const setInnerTextDelivery = (id, value) => {
+  document.getElementById(id).innerText = value;
+};
+
 // set innerText function
 const setInnerText = (id, value) => {
   document.getElementById(id).innerText = value.toFixed(2);
@@ -70,15 +77,15 @@ const setInnerText = (id, value) => {
 const updateTaxAndCharge = () => {
   const priceConverted = getInputValue("price");
   if (priceConverted > 200) {
-    setInnerText("delivery-charge", 30);
+    setInnerTextDelivery("delivery-charge", 30);
     setInnerText("total-tax", priceConverted * 0.2);
   }
   if (priceConverted > 400) {
-    setInnerText("delivery-charge", 50);
+    setInnerTextDelivery("delivery-charge", 50);
     setInnerText("total-tax", priceConverted * 0.3);
   }
   if (priceConverted > 500) {
-    setInnerText("delivery-charge", 60);
+    setInnerTextDelivery("delivery-charge", 60);
     setInnerText("total-tax", priceConverted * 0.4);
   }
 };
@@ -88,5 +95,3 @@ const updateTotal = () => {
   const grandTotal = getInputValue("price") + getInputValue("delivery-charge") + getInputValue("total-tax");
   document.getElementById("total").innerText = grandTotal.toFixed(2);
 };
-
-updateTotal();
